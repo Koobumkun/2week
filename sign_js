@@ -1,0 +1,91 @@
+const putName = document.getElementById('putName');
+const putNick = document.getElementById('putNick');
+const putMail = document.getElementById('putMail');
+const putPassword = document.getElementById('putPassword');
+const putCheck = document.getElementById('putCheck');
+const apply = document.getElementById('apply');
+const close = document.getElementById('close');
+const complete = document.getElementById('complete'); 
+var error1 = document.getElementById('error1');
+var error2 = document.getElementById('error2');
+var error3 = document.getElementById('error3');
+var error4 = document.getElementById('error4');
+var error5 = document.getElementById('error5');
+
+putName.onmousedown = ()=>{
+    if(putName.value.trim()!=""){
+        error1.textContent="멋진 이름이네요";
+        error1.style.color="green";
+        error1.style.visibility="visible";
+        return true;
+    }
+    else{
+        error1.style.visibility="visible";
+        return false;
+    }
+}
+putNick.onmousedown = ()=>{
+    if(putNick.value.length>=2&&putNick.value.length<=5){
+        error2.textContent="멋진 닉네임이네요";
+        error2.style.color="green";
+        error2.style.visibility="visible";
+        return true;
+    }
+    else{
+        error2.style.visibility="visible";
+        return false;
+    }
+}
+putMail.onmousedown = ()=>{
+    var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+    if(reg_email.test(putMail.value)){
+        error3.textContent="올바른 이메일 형식입니다";
+        error3.style.color="green";
+        error3.style.visibility="visible";
+        return true;
+    }
+    else{
+        error3.style.visibility="visible";
+        return false;
+    }
+}
+putPassword.onmousedown = ()=>{
+    var count = 0;
+    for(var i = 0; i < putPassword.value.length; ++i){
+        if(putPassword.value.charCodeAt(i)>=65 && putPassword.value.charCodeAt(i)<=90 || 
+        putPassword.value.charCodeAt(i)>=97 && putPassword.value.charCodeAt(i)<=122 ||
+        putPassword.value.charCodeAt(i)>=48 && putPassword.value.charCodeAt(i)<=57){
+            count+=1;
+        }
+    }
+    if(count===putPassword.value.length){
+        error4.textContent="안전한 비밀번호입니다";
+        error4.style.color="green";
+        error4.style.visibility="visible";
+        return true;
+    }
+    else{
+        error4.style.visibility="visible";
+        return false;
+    }
+}
+putCheck.onmousedown = ()=>{
+    if(putPassword.value===putCheck.value){
+        error5.textContent="비밀번호가 일치합니다";
+        error5.style.color="green";
+        error5.style.visibility="visible";
+        return true;
+    }
+    else{
+        error5.style.visibility="visible";
+        return false;
+    }
+}
+apply.onclick = ()=>{
+    if(putName.onmousedown&& putNick.onmousedown&&putMail.onmousedown&&putPassword.onmousedown&&putCheck.onmousedown){
+        complete.style.display = "flex";
+    }
+}
+close.onclick = ()=>{
+    complete.style.display = "none";
+}
